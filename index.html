@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito de Compras</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Tecnología</title>
+  <link rel="icon" href="img/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>🛒 Carrito de Compras</h1>
-        <button id="ver-carrito">Ver Carrito (<span id="contador">0</span>)</button>
-    </header>
+  <h1>Tecnología</h1>
+<!--Contenedor de productos-->
+  <section id="productos">
+    <h2>Lista de Productos</h2>
+    <!-- Contenedor de tipo grid -->
+    <div id="lista-productos" class="grid"></div>
+  </section>
 
-    <script src="productos.js"></script>
+  <section id="acciones">
+    <h2>Carrito</h2>
+    <div id="lista-carrito"></div>
+  </section>
+
+  <script src="js/productos.js"></script>
+  <script src="js/carrito.js"></script>
 </body>
 </html>

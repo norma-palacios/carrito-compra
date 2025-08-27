@@ -94,3 +94,20 @@ h1, h2 {
   border-bottom: 1px solid #ddd;
   padding: 5px 0;
 }
+
+/* Resalta leyenda cuando no hay stock de productos */
+.producto .estado-sin-stock {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.sin-stock {
+  display: inline-block;
+  background: #f1c40f;
+  color: #2c3e50;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+}

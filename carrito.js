@@ -1,6 +1,28 @@
     // Aquí se manejará el carrito: agregar y eliminar productos
 let carrito = [];
+function descargarFacturaJSON() {
+  const { subtotal, impuesto, total } = resumenCompra(carrito);
+  const factura = {
+    fecha: new Date().toISOString(),
+    moneda: 'USD',
+    iva: TAX_RATE,
+    items: carrito.map(it => ({
+      id: it.id,
+      nombre: it.nombre,
+      cantidad: Number(it.cantidad),
+      precioUnitario: Number(it.precio),
+      subtotal: Number((it.cantidad * it.precio).toFixed(2)),
+    })),
+    totales: { subtotal, impuesto, total }
+  };
 
+  const blob = new Blob([JSON.stringify(factura, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `factura_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
 // Generar  PDF de factura
 function descargarFacturaPDF() {
     const el = document.querySelector('#factura-print');
@@ -15,7 +37,7 @@ function descargarFacturaPDF() {
     };
     html2pdf().from(el).set(opt).save();
 }
-// ernera DOCX de facttura
+// Genera DOCX de factura
 function descargarFacturaDOCX() {
     const el = document.querySelector('#factura-print');
     if (!window.docx) { alert('Librería DOCX no cargada'); return; }
@@ -182,6 +204,7 @@ function confirmarCompra() {
     <table class="table-factura" aria-label="Detalle de la factura">
       <thead>
         <tr><th>Producto</th><th>Cant.</th><th>Unit.</th><th>Subtotal</th></tr>
+        <button class="btn" onclick="descargarFacturaJSON()">Descargar JSON</button>
       </thead>
       <tbody>
         ${filas}
@@ -254,6 +277,7 @@ function mostrarCarrito() {
     <button class="btn primary" onclick="confirmarCompra()">Confirmar compra</button> `;
     contenedor.appendChild(actions);
 }
+
 
 
 
